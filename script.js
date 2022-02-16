@@ -9,28 +9,68 @@ const computerPlay = () => {
     }
 }
 
-//One round of rock, paper, scissors
-const playRound = (computerSelection, playerSelection) => {
-    if (computerSelection == playerSelection){
-        return "It's a Draw";
-    } else if (computerSelection == "rock" && playerSelection == "scissors"){
-        return "You Lost! Rock beats scissors";
-    } else if (computerSelection == "scissors" && playerSelection == "paper"){
-        return "You Lost! Scissors beats paper";
-    } else if (computerSelection == "paper" && playerSelection == "rock"){
-        return "You Lost! Paper beats rock";
-    } else {
-        return "You won! Good job";
-    }
-}
-
 //Declare that the computers input is the computerplay function
 const computerSelection = computerPlay();
 
-//Play a 5 round game
+//Create the buttons that call the correct option
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
+const result = document.querySelector('.result');
+const userPoint = document.querySelector('.user');
+const computerPoint = document.querySelector('.pc');
+
+//Display the running score, and announce a winner of the game once one player reaches 5 points
 const game = () => {
     for (let i = 0; i < 5; i++){
-        return playRound(computerSelection, window.prompt("Enter rock, paper, or scissors?"));
+        //Make the buttons return the correct option on click
+        rock.addEventListener('click', () => {
+            playRound('rock');
+        });
+
+        paper.addEventListener('click', () => {
+            playRound('paper');
+        });
+
+        scissors.addEventListener('click', () => {
+            playRound('scissors');
+        });
+
+        //Round of rock, paper, scissors
+        const playRound = (playerSelection) => {
+            const computerSelection = computerPlay();
+
+            //Display the score of both user and pc
+            let userScore = parseInt(0);
+            let computerScore = parseInt(0);
+
+            if (computerSelection == playerSelection){
+                result.textContent = "It's a Draw";
+                computerPoint.textContent = "Your opponent's score is "+ computerScore;
+                userPoint.textContent = "Your score is "+ userScore;
+            } else if (computerSelection == "rock" && playerSelection == "scissors"){
+                computerScore += 1;
+                computerPoint.textContent = "Your opponent's score is "+ computerScore;
+                userPoint.textContent = "Your score is "+ userScore
+                result.textContent = "You Lost! Rock beats scissors";
+            } else if (computerSelection == "scissors" && playerSelection == "paper"){
+                computerScore += 1;
+                computerPoint.textContent = "Your opponent's score is "+ computerScore;
+                userPoint.textContent = "Your score is "+ userScore
+                result.textContent = "You Lost! Scissors beats paper";
+            } else if (computerSelection == "paper" && playerSelection == "rock"){
+                computerScore += 1;
+                computerPoint.textContent = "Your opponent's score is "+ computerScore;
+                userPoint.textContent = "Your score is "+ userScore
+                result.textContent = "You Lost! Paper beats rock";
+            } else {
+                userScore += 1;
+                computerPoint.textContent = "Your opponent's score is "+ computerScore;
+                userPoint.textContent = "Your score is "+ userScore
+                result.textContent = "You won! Good job";
+            }
+        }
     }
-}
-console.log(game());
+};
+
+game();
