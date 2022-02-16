@@ -36,39 +36,32 @@ const game = () => {
             playRound('scissors');
         });
 
+        //Display the score of both user and pc
+        let userScore = 0;
+        let computerScore = 0;
+
         //Round of rock, paper, scissors
         const playRound = (playerSelection) => {
+            
             const computerSelection = computerPlay();
-
-            //Display the score of both user and pc
-            let userScore = parseInt(0);
-            let computerScore = parseInt(0);
 
             if (computerSelection == playerSelection){
                 result.textContent = "It's a Draw";
-                computerPoint.textContent = "Your opponent's score is "+ computerScore;
-                userPoint.textContent = "Your score is "+ userScore;
             } else if (computerSelection == "rock" && playerSelection == "scissors"){
                 computerScore += 1;
-                computerPoint.textContent = "Your opponent's score is "+ computerScore;
-                userPoint.textContent = "Your score is "+ userScore
                 result.textContent = "You Lost! Rock beats scissors";
             } else if (computerSelection == "scissors" && playerSelection == "paper"){
                 computerScore += 1;
-                computerPoint.textContent = "Your opponent's score is "+ computerScore;
-                userPoint.textContent = "Your score is "+ userScore
                 result.textContent = "You Lost! Scissors beats paper";
             } else if (computerSelection == "paper" && playerSelection == "rock"){
                 computerScore += 1;
-                computerPoint.textContent = "Your opponent's score is "+ computerScore;
-                userPoint.textContent = "Your score is "+ userScore
                 result.textContent = "You Lost! Paper beats rock";
             } else {
                 userScore += 1;
-                computerPoint.textContent = "Your opponent's score is "+ computerScore;
-                userPoint.textContent = "Your score is "+ userScore
                 result.textContent = "You won! Good job";
             }
+            computerPoint.textContent = "Your opponent's score is "+ computerScore;
+            userPoint.textContent = "Your score is "+ userScore;
         }
     }
 };
